@@ -23,7 +23,7 @@ export const POST = async (request: NextRequest) => {
     }
 
     connectDb();
-    const userFound = await User.findOne({ username });
+    const userFound = await User.findOne({ $or: [{ username }, { email }] });
     console.log(userFound);
     if (userFound) {
       return NextResponse.json(
